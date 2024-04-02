@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from './components/Header';
 
 import './css/Card.css';
 import './css/Search.css';
 
+import Header from './components/Header';
+
 function App() {
   const [details, setDetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [deleteDetailId, setDeleteDetailId] = useState(null);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -21,41 +24,90 @@ function App() {
     fetchDetails();
   }, []);
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleDeleteDetail = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/details/${id}`);
+      const updatedDetails = details.filter(detail => detail.id !== id);
+      setDetails(updatedDetails);
+    } catch (error) {
+      console.error('Error deleting detail:', error);
+    }
+  };
+
+  const handleConfirmDelete = (id) => {
+    setDeleteDetailId(id);
+  };
+
   const filteredDetails = details.filter(detail =>
     detail.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const indexOfLastDetail = currentPage * 5;
+  const indexOfFirstDetail = indexOfLastDetail - 5;
+  const currentDetails = filteredDetails.slice(indexOfFirstDetail, indexOfLastDetail);
+
+  const renderDetails = currentDetails.map(({ id, name, assemblyImg, description }) => (
+    <div key={id} className="detail-item">
+      <img className="detail-item__image" src={'./images/' + assemblyImg} alt="loading image" />
+      <div className="detail-info">
+        <div className="detail-list">
+          <p>Наименование: <span className="detail-list__name">{name}</span></p>
+          <p>Описание: <span className="detail-list__desc">{description}</span></p>
+        </div>
+        <div className="detail-action">
+          <a className="detail-action__info" href="#">Подробнее</a>
+          <a className="detail-action__edit" href="#">Изменить</a>
+          <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id)}>Удалить</a>
+        </div>
+      </div>
+    </div>
+  ));
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredDetails.length / 5); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
     <div>
       <Header />
       <div className="detail-search">
-        <input
-          className='detail-search__input'
-          type="text"
-          placeholder="Поиск по названию детали"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <input
+        className='detail-search__input'
+        type="text"
+        placeholder="Поиск по названию детали"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       </div>
-      {filteredDetails.length === 0 ? (
-        <p>Данных не найдено</p>
+      {renderDetails.length === 0 ? (
+        <p>Деталей не найдено</p>
       ) : (
-        filteredDetails.map(({ id, name, assemblyImg, disassemblyImg, description, components }) => (
-          <div key={id} className="detail-item">
-            <img className="detail-item__image" src={'./images/' + assemblyImg} alt="loading image" />
-            <div className="detail-info">
-              <div className="detail-list">
-                <p>Наименование: <span className="detail-list__name">{name}</span></p>
-                <p>Описание: <span className="detail-list__desc">{description}</span></p>
-              </div>
-              <div className="detail-action">
-                <a className="detail-action__info" href="#">Подробнее</a>
-                <a className="detail-action__edit" href="#">Изменить</a>
-                <a className="detail-action__delete" href="#">Удалить</a>
-              </div>
-            </div>
+        <>
+          {renderDetails}
+          <ul className="pagination">
+            {pageNumbers.map(number => (
+              <li key={number} className="page-item">
+                <a onClick={() => handlePageChange(number)} href="!#" className="page-link">
+                  {number}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {deleteDetailId !== null && (
+        <div className="popup">
+          <div className="popup-inner">
+            <p>Вы действительно хотите удалить данную деталь?</p>
+            <button onClick={() => handleDeleteDetail(deleteDetailId)}>Да</button>
+            <button onClick={() => setDeleteDetailId(null)}>Отмена</button>
           </div>
-        ))
+        </div>
       )}
     </div>
   );

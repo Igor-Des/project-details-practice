@@ -35,16 +35,5 @@
     "disassemblyImg": "8.png",
     "description": "Крепежный элемент, используемый для равномерного распределения нагрузки.",
     "components": []
-  },
-  {
-    "id": "5",
-    "name": "test",
-    "assemblyImg": "1.png",
-    "disassemblyImg": "2.png",
-    "description": "desc",
-    "components": [
-      "test1",
-      "test2"
-    ]
   }
 ]
