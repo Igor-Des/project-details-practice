@@ -1,0 +1,11 @@
+.detail-search {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.detail-search__input {
+    color: #333;
+    text-align: center;
+    height: 30px;
+    width: 300px;
+}
