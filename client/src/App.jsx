@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './css/Card.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/details');
+        setDetails(response.data);
+      } catch (error) {
+        console.error('Error fetching details:', error);
+      }
+    };
+    fetchDetails();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      details:
+      
+      {details.map(({ id, name, assemblyImg, disassemblyImg, description, components }) => (
+        <div key={id} className="detail-item">
+          <img className="detail-item__image" src={'./images/' + assemblyImg}
+          alt="loading image"/>
+        <div className="detail-info">
+          <div className="detail-list">
+            <p>Наименование: <span className="detail-list__name">{name}</span></p>
+            <p>Описание: <span className="detail-list__desc">{description}</span></p>
+          </div>
+          <div className="detail-action">
+            <a className="detail-action__info" href="#">Подробнее</a>
+            <a className="detail-action__edit" href="#">Изменить</a>
+            <a className="detail-action__delete" href="#">Удалить</a>
+          </div>
+        </div>
+        </div>
+      ))}
+
+    </div>
+  );
 }
 
-export default App
+export default App;

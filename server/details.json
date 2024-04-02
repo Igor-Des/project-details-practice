@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Винт",
+    "assemblyImg": "1.jpg",
+    "disassemblyImg": "2.png",
+    "description": "Крепежный элемент, имеющий резьбу.",
+    "components": [
+      "Гайка",
+      "Шайба"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Болт",
+    "assemblyImg": "2.png",
+    "disassemblyImg": "4.png",
+    "description": "Крепежный элемент, имеющий головку и резьбу.",
+    "components": [
+      "Гайка"
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Гайка",
+    "assemblyImg": "3.png",
+    "disassemblyImg": "6.png",
+    "description": "Крепежный элемент, предназначенный для закрепления болта или винта.",
+    "components": []
+  },
+  {
+    "id": "4",
+    "name": "Шайба",
+    "assemblyImg": "4.jpg",
+    "disassemblyImg": "8.png",
+    "description": "Крепежный элемент, используемый для равномерного распределения нагрузки.",
+    "components": []
+  },
+  {
+    "id": "5",
+    "name": "test",
+    "assemblyImg": "1.png",
+    "disassemblyImg": "2.png",
+    "description": "desc",
+    "components": [
+      "test1",
+      "test2"
+    ]
+  }
+]
