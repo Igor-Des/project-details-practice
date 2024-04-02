@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import './css/Card.css';
 import './css/Search.css';
+import './css/Pagination.css';
+import './css/Popup.css';
 
 import Header from './components/Header';
 
@@ -32,6 +34,7 @@ function App() {
     try {
       await axios.delete(`http://localhost:3001/details/${id}`);
       const updatedDetails = details.filter(detail => detail.id !== id);
+      setDeleteDetailId(null);
       setDetails(updatedDetails);
     } catch (error) {
       console.error('Error deleting detail:', error);

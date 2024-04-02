@@ -1,0 +1,24 @@
+.pagination {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination a {
+    text-decoration: none;
+  }
+
+  .page-item {
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .page-link:hover {
+    text-decoration: none;
+  }
+  
