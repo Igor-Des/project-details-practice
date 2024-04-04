@@ -34,15 +34,17 @@
     margin: 0 auto;
 }
 .detail-action a {
-    margin: 0px 10px;
-    background-color: #cccccc;
+    margin: 0px 10px;    
+    border: 1px solid #333;  
+    background-color: #ebebeb;
     padding: 7px;
     border-radius: 5px;
     text-decoration: none;
-    color: #666666;
+    color: #333;
     transition: .2s ease-in;
 }
 .detail-action a:hover {
-    text-decoration: none;
-    color: #000000;
+    border: 1px solid #000; 
+    background-color: #adadad;
+    color: #fff;
 }

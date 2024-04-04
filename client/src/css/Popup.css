@@ -14,16 +14,43 @@
   
   .popup-inner {
     background-color: #fff;
-    padding: 20px;
+    padding: 30px;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   }
   
   .popup-inner p {
-    margin-bottom: 20px;
+    margin: 8px auto;
   }
   
-  .popup-inner button {
+  .popup-inner__btn {
+    cursor: pointer; 
+    border: 1px solid #333;   
+    background-color: #ffffff;
+    color: #030303;
+    padding: 7px 20px;
+    border-radius: 8px;
     margin-right: 10px;
+    transition: .2s ease-in;
+  }
+  .delete {
+    background-color: rgb(255, 216, 216);
+  }
+  .popup-inner__btn:hover {
+    background-color: #b4b4b4;
+    color: #fff;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+  
+  .delete:hover {
+    background-color: rgb(255, 129, 129);
+  }
+  .popup-inner hr {
+    background-color: #333;
+    height: 1px;
+  }
+  .popup-inner__detail {
+    font-weight: 600;
   }
   

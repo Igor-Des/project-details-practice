@@ -13,6 +13,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [deleteDetailId, setDeleteDetailId] = useState(null);
+  const [detailForDel, setDetailForDel] = useState(null);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -41,8 +42,9 @@ function App() {
     }
   };
 
-  const handleConfirmDelete = (id) => {
+  const handleConfirmDelete = (id, name, description) => {
     setDeleteDetailId(id);
+    setDetailForDel({id, name, description});
   };
 
   const filteredDetails = details.filter(detail =>
@@ -53,9 +55,13 @@ function App() {
   const indexOfFirstDetail = indexOfLastDetail - 5;
   const currentDetails = filteredDetails.slice(indexOfFirstDetail, indexOfLastDetail);
 
-  const renderDetails = currentDetails.map(({ id, name, assemblyImg, description }) => (
+  const renderDetails = currentDetails.map(({ id, name, assemblyImg, disassemblyImg, description }) => (
     <div key={id} className="detail-item">
-      <img className="detail-item__image" src={'./images/' + assemblyImg} alt="loading image" />
+      <img
+        className="detail-item__image"        
+        src={'./images/' + assemblyImg}
+        alt="loading image"
+        />
       <div className="detail-info">
         <div className="detail-list">
           <p>Наименование: <span className="detail-list__name">{name}</span></p>
@@ -64,7 +70,7 @@ function App() {
         <div className="detail-action">
           <a className="detail-action__info" href="#">Подробнее</a>
           <a className="detail-action__edit" href="#">Изменить</a>
-          <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id)}>Удалить</a>
+          <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id, name, description)}>Удалить</a>
         </div>
       </div>
     </div>
@@ -107,8 +113,11 @@ function App() {
         <div className="popup">
           <div className="popup-inner">
             <p>Вы действительно хотите удалить данную деталь?</p>
-            <button onClick={() => handleDeleteDetail(deleteDetailId)}>Да</button>
-            <button onClick={() => setDeleteDetailId(null)}>Отмена</button>
+            <hr />
+            <p>Наиманование: <span className='popup-inner__detail'>{detailForDel.name}</span></p>
+            <p>Описание: <span className='popup-inner__detail'>{detailForDel.description}</span></p>
+            <button className='popup-inner__btn delete' onClick={() => handleDeleteDetail(deleteDetailId)}>Удалить</button>
+            <button className='popup-inner__btn' onClick={() => setDeleteDetailId(null)}>Отмена</button>
           </div>
         </div>
       )}
