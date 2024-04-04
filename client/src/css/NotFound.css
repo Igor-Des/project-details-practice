@@ -1,0 +1,32 @@
+.not-found {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .not-found h1 {
+    font-size: 36px;
+    color: rgb(46, 161, 127);
+  }
+  .not-found__image {
+    width: 300px;
+  }
+  
+  .not-found p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  .btn-home {
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(46, 161, 127);
+    
+    transition: .2s ease-in; 
+  }
+  .btn-home:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(37, 211, 159);
+  
+}
