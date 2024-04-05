@@ -62,6 +62,8 @@ function DetailPage() {
           <p>Описание: <span className="detail-page__bold">{detail.description}</span></p>
 
           <button className='detail-page__btn' onClick={handleClick}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>
+          
+          <p><Link to={`/details/edit/${id}`} className="detail-page__edit">Изменить</Link></p>
 
           <div className="table-container">
             <table>

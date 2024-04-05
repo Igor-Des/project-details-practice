@@ -58,7 +58,7 @@ function Home() {
         </div>
         <div className="detail-action">
           <Link to={`/details/${id}`} className="detail-action__info">Подробнее</Link>
-          <a className="detail-action__edit" href="#">Изменить</a>
+          <Link to={`/details/edit/${id}`} className="detail-action__edit">Изменить</Link>
           <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id, name, description)}>Удалить</a>
         </div>
       </div>

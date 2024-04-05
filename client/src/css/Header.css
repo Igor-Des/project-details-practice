@@ -5,8 +5,13 @@ header {
     background-color: #333;
 }
 
-header p {
+.btn-home-back {
+    text-decoration: none;
     display: block;
     margin: 0px auto;
     color: #fff;
+}
+
+.btn-home-back:hover {
+    font-weight: 500;
 }

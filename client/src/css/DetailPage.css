@@ -53,3 +53,15 @@
 .detail-page__bold {
     font-weight: 600;
 }
+
+.detail-page__edit {
+    text-decoration: none;
+    color:  rgb(46, 161, 127);;
+    font-weight: 500;
+    transition: .2s ease-in; 
+}
+
+.detail-page__edit:hover {
+    font-weight: bold;
+    color: #fc6f6f;
+}
