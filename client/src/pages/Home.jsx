@@ -32,7 +32,7 @@ function Home() {
             username: response.data.username,
             role: response.data.role
           });
-          console.log("token good")
+          console.log("token verify")
         }
       } catch (error) {
         console.error('Error checking token:', error);
@@ -58,7 +58,10 @@ function Home() {
   
   const handleDeleteDetail = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/details/${id}`);
+      const token = localStorage.getItem("tokenAuthDetail")
+      await axios.delete(`http://localhost:3001/details/${id}`, {
+        headers: { Authorization: token }
+      });
       const updatedDetails = details.filter(detail => detail.id !== id);
       setDeleteDetailId(null);
       setDetails(updatedDetails);

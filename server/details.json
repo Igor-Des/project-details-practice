@@ -90,13 +90,5 @@
     ],
     "assemblyImg": "amort-pered.png",
     "disassemblyImg": "amort-pered-razbor.png"
-  },
-  {
-    "id": "6",
-    "name": "Амортизатор задний",
-    "assemblyImg": "amort-zadniy.png",
-    "disassemblyImg": "amort-zadniy-razbor.png",
-    "description": "часть тормозной системы и её основной рабочий компонент",
-    "components": []
   }
 ]

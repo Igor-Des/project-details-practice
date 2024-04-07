@@ -43,6 +43,7 @@ const LoginForm = () => {
                 </div>
                 {error && <p className="error-message">{error}</p>}
                 <button type="submit" className="btn-login">Войти</button>
+            <Link to={`/register`} className="btn-login__reg">Регистрация</Link>
             </form>
         </div>
     );

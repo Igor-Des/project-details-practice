@@ -43,3 +43,17 @@
 .btn-login:hover {
     background-color: rgb(37, 211, 159);
 }
+
+.btn-login__reg {
+    margin: 10px auto;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    
+    transition: .2s ease-in; 
+}
+
+.btn-login__reg:hover {
+    font-weight: 500;
+    color: #000;
+}
