@@ -5,20 +5,25 @@ import Home from './pages/Home';
 import DetailPage from './pages/DetailPage';
 import EditDetailPage from './pages/EditDetailPage';
 import NotFound from './pages/NotFound';
+import LoginForm from './pages/LoginForm';
+import RegisterForm from './pages/RegisterForm';
 
 
 
 function App() {
-  
+
   return (
     <>
-    <Header/>
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/details/:id' element={<DetailPage />} />
-      <Route path='/details/edit/:id' element={<EditDetailPage />} />
-      <Route path='*' element={<NotFound />} />  
-    </Routes>
+      <Header />
+      <Routes>
+        <Route path='/register' element={<RegisterForm />} />
+        <Route path='/login' element={<LoginForm />} />
+
+        <Route path='/' element={<Home />} />
+        <Route path='/details/:id' element={<DetailPage />} />
+        <Route path='/details/edit/:id' element={<EditDetailPage />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </>
   );
 }

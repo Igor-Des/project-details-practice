@@ -7,8 +7,7 @@ import './../css/Header.css'
 function Header() {
   return (
     <header>
-      {/* <p>Каталог деталей</p> */}
-      <Link to={`/`} className="btn-home-back">Каталог товаров</Link>
+      <Link to={`/`} className="btn-home-back">Каталог деталей</Link>
     </header>
   );
 }
