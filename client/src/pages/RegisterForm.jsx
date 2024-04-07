@@ -9,8 +9,11 @@ const RegisterForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/api/register', { username, password, role });
+      const response = await axios.post('http://localhost:3001/api/register', { username, password, role });
       console.log('User registered successfully');
+      
+      // Сохраняем токен в localStorage
+      localStorage.setItem('token', response.data.token);
     } catch (error) {
       console.error('Error registering user:', error);
     }

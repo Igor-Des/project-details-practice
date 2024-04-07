@@ -1,27 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './../css/Card.css';
 import './../css/Search.css';
 import './../css/Popup.css';
 
-function Home() {
+function Home(appConst) {
   const [details, setDetails] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteDetailId, setDeleteDetailId] = useState(null);
   const [detailForDel, setDetailForDel] = useState(null);
+  const [userRole, setUserRole] = useState('');
+
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const response = await axios.get('http://localhost:3001/details');
         setDetails(response.data);
+        console.log("detail loaded, appjsx const:", appConst)
       } catch (error) {
         console.error('Error fetching details:', error);
       }
     };
     fetchDetails();
+
+    // Проверка токена и извлечение информации о роли пользователя
+    const checkToken = async () => {
+      try {
+        const token = localStorage.getItem("tokenAuthDetail")
+        console.log(token);
+        if (token) {
+          const response = await axios.get('http://localhost:3001/api/user-role', {
+            headers: { Authorization: token }
+          });
+          setUserRole(response.data.role);
+          console.log("token good")
+          console.log("name", response.data.username)
+        }
+      } catch (error) {
+        console.error('Error checking token:', error);
+      }
+    };
+    checkToken();
   }, []);
 
   const handleDeleteDetail = async (id) => {
@@ -58,8 +80,13 @@ function Home() {
         </div>
         <div className="detail-action">
           <Link to={`/details/${id}`} className="detail-action__info">Подробнее</Link>
-          <Link to={`/details/edit/${id}`} className="detail-action__edit">Изменить</Link>
-          <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id, name, description)}>Удалить</a>
+          {/* Показываем кнопки "Изменить" и "Удалить" только для роли "admin" */}
+          {userRole === 'admin' && (
+            <>
+              <Link to={`/details/edit/${id}`} className="detail-action__edit">Изменить</Link>
+              <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id, name, description)}>Удалить</a>
+            </>
+          )}
         </div>
       </div>
     </div>

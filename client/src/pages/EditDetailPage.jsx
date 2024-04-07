@@ -39,6 +39,9 @@ function EditDetailPage() {
 
   const handleSave = async () => {
     try {
+      // Получаем токен из localStorage
+      const token = localStorage.getItem("tokenAuthDetail")
+      console.log("token", token);
       await axios.put(`http://localhost:3001/details/${id}`, {
         id,
         name,

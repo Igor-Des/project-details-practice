@@ -11,7 +11,7 @@ import RegisterForm from './pages/RegisterForm';
 
 
 function App() {
-
+  const appConts = "Hello from App.JSX"
   return (
     <>
       <Header />
@@ -19,7 +19,7 @@ function App() {
         <Route path='/register' element={<RegisterForm />} />
         <Route path='/login' element={<LoginForm />} />
 
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home appConst={appConts} />} />
         <Route path='/details/:id' element={<DetailPage />} />
         <Route path='/details/edit/:id' element={<EditDetailPage />} />
         <Route path='*' element={<NotFound />} />
