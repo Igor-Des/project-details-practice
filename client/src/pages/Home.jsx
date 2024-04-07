@@ -5,6 +5,7 @@ import axios from 'axios';
 import './../css/Card.css';
 import './../css/Search.css';
 import './../css/Popup.css';
+import './../css/DetailError.css';
 
 function Home() {
   const [details, setDetails] = useState([]);
@@ -110,12 +111,28 @@ function Home() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      {renderDetails.length === 0 ? (
-        <p>Деталей не найдено</p>
+      {user.role !== null ? (
+        renderDetails.length === 0 ? (
+          <div className='detail-not-found'>
+            <p>Деталей не найдено</p>
+            <p>Попробуйте поискать что-то другое</p>
+            <img className='detail-page__error-img' src="./../../images/sad-smile-png.png" alt="sad smile" />
+          </div>
+        ) : (
+          <>
+            {renderDetails}
+          </>
+        )
       ) : (
-        <>
-          {renderDetails}
-        </>
+        <div className="detail-auth">
+          <p>Необходимо авторизоваться или зарегистрироваться</p>
+          
+          <div className='user-profile'>
+            <img className='user-auth__image' src="./images/people-login.png" alt="need login image" />
+            <Link to={`/register`} className='user-auth'>Регистрация</Link>
+            <Link to={`/login`} className='user-auth'>Вход</Link>
+          </div>
+        </div>
       )}
       {deleteDetailId !== null && (
         <div className="popup">
@@ -131,6 +148,7 @@ function Home() {
       )}
     </div>
   );
+  
 }
 
 export default Home;

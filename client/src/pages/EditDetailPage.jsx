@@ -146,7 +146,9 @@ function EditDetailPage() {
           <button className='detail-page__btn' onClick={handleImageChange}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>
         </div>
       </div>
+      <div className='btn-home-container'>
       <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
+      </div>
     </div>
   );
 }

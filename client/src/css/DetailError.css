@@ -1,0 +1,35 @@
+.detail-not-found, .detail-auth {
+    margin: 0 auto;
+    text-align: center;
+}
+.detail-not-found p {
+    margin: 5px auto;
+}
+.user-profile {
+    display: block;
+    text-align: center;
+}
+
+.user-auth {
+    margin: 10px 10px;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(46, 161, 127);
+    
+    transition: .2s ease-in; 
+}
+
+.user-auth__image {
+    display: block;
+    margin: 20px auto;
+    height: 200px;
+}
+
+.user-auth:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(37, 211, 159);
+  
+}

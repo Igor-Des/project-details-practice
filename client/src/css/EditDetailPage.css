@@ -33,3 +33,8 @@ button {
     background-color: rgb(37, 170, 211);
   
 }
+
+.btn-home-container {
+    display: block;
+    margin: 30px auto;
+}

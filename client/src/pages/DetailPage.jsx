@@ -10,6 +10,10 @@ function DetailPage() {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState({
+    username: null,
+    role: null
+  });
 
   const [isImageChanged, setIsImageChanged] = useState(true);
 
@@ -18,6 +22,26 @@ function DetailPage() {
   };
 
   useEffect(() => {
+    // Проверка токена
+    const checkToken = async () => {
+      try {
+        const token = localStorage.getItem("tokenAuthDetail")
+        console.log(token);
+        if (token) {
+          const response = await axios.get('http://localhost:3001/api/user-role', {
+            headers: { Authorization: token }
+          });
+          setUser({
+            username: response.data.username,
+            role: response.data.role
+          });
+          console.log("token good")
+        }
+      } catch (error) {
+        console.error('Error checking token:', error);
+      }
+    };
+
     const fetchDetail = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/details/${id}`);
@@ -29,7 +53,13 @@ function DetailPage() {
       }
     };
 
-    fetchDetail();
+
+    const fetchData = async () => {
+      await checkToken();
+      await fetchDetail();
+    };
+
+    fetchData();
   }, [id]);
 
   if (loading) {
@@ -63,9 +93,12 @@ function DetailPage() {
           </div>
           <p>Название: <span className="detail-page__bold">{detail.name}</span></p>
           <p>Описание: <span className="detail-page__bold">{detail.description}</span></p>
-
+          {user.role === 'admin' && (
+            <>
           <p><Link to={`/details/edit/${id}`} className="detail-page__edit">Изменить</Link></p>
-
+            </>
+          )
+          }
           <div className="table-container">
             <table>
               <thead>
@@ -89,9 +122,9 @@ function DetailPage() {
         </div>
       )}
 
-
-      <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
-
+      <div className="btn-home-container">
+        <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
+      </div>
     </div>
   );
 }
