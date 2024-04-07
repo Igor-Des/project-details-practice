@@ -53,16 +53,17 @@ function DetailPage() {
       <h2>Деталь(№{id}) в {isImageChanged ? "сборе" : "разборе"}</h2>
       {detail && (
         <div className='detail-page'>
-          <img
-            className="detail-page__image"
-            src={isImageChanged ? './../images/' + detail.assemblyImg : './../images/' + detail.disassemblyImg}
-            alt="loading image"
-          />
+          <button className='detail-page__btn' onClick={handleClick}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>
+          <div className='detail-page__image-click' onClick={handleClick}>
+            <img
+              className="detail-page__image"
+              src={isImageChanged ? './../images/' + detail.assemblyImg : './../images/' + detail.disassemblyImg}
+              alt="loading image"
+            />
+          </div>
           <p>Название: <span className="detail-page__bold">{detail.name}</span></p>
           <p>Описание: <span className="detail-page__bold">{detail.description}</span></p>
 
-          <button className='detail-page__btn' onClick={handleClick}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>
-          
           <p><Link to={`/details/edit/${id}`} className="detail-page__edit">Изменить</Link></p>
 
           <div className="table-container">

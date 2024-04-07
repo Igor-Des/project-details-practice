@@ -28,3 +28,9 @@
   table tbody tr:hover {
     background-color: #f2f2f2;
   }
+
+  .detail-page__image-click {
+    margin: 0 auto;
+    width: 300px;
+    cursor: pointer;
+  }

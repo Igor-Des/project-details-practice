@@ -17,7 +17,7 @@
         "K1P 34959123"
       ],
       [
-        "Резьба М2",
+        "Резьба",
         "M1P 4573231"
       ],
       [
@@ -60,10 +60,15 @@
   {
     "id": "4",
     "name": "Тормозной диск",
-    "assemblyImg": "disk.jpg",
-    "disassemblyImg": "disk-razbor.png",
     "description": "крепежный элемент, используемый для равномерного распределения нагрузки.",
-    "components": []
+    "components": [
+      [
+        "asd",
+        "asd"
+      ]
+    ],
+    "assemblyImg": "disk.jpg",
+    "disassemblyImg": "disk-razbor.png"
   },
   {
     "id": "5",

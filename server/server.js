@@ -63,14 +63,24 @@ app.post('/api/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const data = await fs.readFile(usersFilePath, 'utf8');
+        const users = JSON.parse(data);
+
+        // Проверка на существование пользователя с таким же именем
+        const existingUser = users.find(user => user.username === username);
+        if (existingUser) {
+            return res.status(400).json({ message: 'User with this username already exists' });
+        }
+
+        // Генерация нового ID на основе последнего ID в списке пользователей
+        const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
         const newUser = {
+            id: +lastUserId + 1, 
             username,
             password: hashedPassword,
             role
         };
 
-        const data = await fs.readFile(usersFilePath, 'utf8');
-        const users = JSON.parse(data);
         users.push(newUser);
 
         await fs.writeFile(usersFilePath, JSON.stringify(users));

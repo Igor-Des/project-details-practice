@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+
 import './../css/EditDetailPage.css';
 
 function EditDetailPage() {
@@ -16,6 +19,8 @@ function EditDetailPage() {
   const [assemblyImg, setAssemblyImg] = useState('');
   const [disassemblyImg, setDisassemblyImg] = useState('');
   const [isImageChanged, setIsImageChanged] = useState(true);
+
+  let navigate = useNavigate();
 
   const fetchData = async () => {
     try {
@@ -42,14 +47,21 @@ function EditDetailPage() {
       // Получаем токен из localStorage
       const token = localStorage.getItem("tokenAuthDetail")
       console.log("token", token);
-      await axios.put(`http://localhost:3001/details/${id}`, {
-        id,
-        name,
-        description,
-        components,
-        assemblyImg,
-        disassemblyImg
-      });
+      await axios.put(
+        `http://localhost:3001/details/${id}`,
+        {
+          id,
+          name,
+          description,
+          components,
+          assemblyImg,
+          disassemblyImg
+        },
+        {
+          headers: { Authorization: token }
+        }
+      );
+      navigate(`/details/${id}`);
       alert('Данные успешно сохранены!');
     } catch (error) {
       console.error('Error saving detail:', error);
@@ -91,7 +103,7 @@ function EditDetailPage() {
     <div className='detail-page__content'>
       <h2>Редактирование детали (№{id})</h2>
       <div className='detail-page'>
-        <img
+        <img 
           className="detail-page__image"
           src={isImageChanged ? `./../../images/${assemblyImg}` : `./../../images/${disassemblyImg}`}
           alt="loading image"

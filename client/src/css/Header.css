@@ -9,16 +9,61 @@ header {
     text-decoration: none;
     display: block;
     margin: 0px auto;
-    color: #fff;
+    color: #a5a5a5;
 }
 
 .btn-home-back:hover {
-    font-weight: 500;
+    color: #fff;
 }
 
 .header-nav {
     margin: 0 auto;
     width: 800px;
     display: flex;
-    
+    align-items: center;    
+}
+
+.header-nav__auth {
+    display: flex;
+}
+.header-nav__auth .btn-home-back {
+    margin: 0px 10px;
+}
+
+.catalog {
+    margin-left: 350px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.btn-auth {
+    margin: 0px 10px;
+    text-decoration: none;
+    color: #a5a5a5;
+}
+
+.btn-auth:hover {
+    color: #fff;
+}
+
+.user-profile__name, .user-profile__role {
+    color: #e6e6e6;
+    margin: 0px auto;
+    font-size: 14px;
+}
+
+.btn-exit {
+    cursor: pointer;
+    background-color: #a5a5a5;
+    border-radius: 5px;
+    border: 0px;
+    color: #000000;
+    transition: .2s ease-in; 
+}
+.btn-exit:hover {
+    background-color: #eceaea;
 }
