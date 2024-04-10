@@ -1,11 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const fs = require('fs').promises;
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const multer = require('multer');
+const path = require('path');
+// require('dotenv').config();
 
 const app = express();
 const PORT = 3001;
@@ -15,7 +16,35 @@ const tokenKey = '1a2b-3c4d-5e6f-7g8h';
 
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+// Настройка хранения загруженных файлов
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/images'); // Путь к папке, где будут сохраняться изображения
+    },
+    filename: function (req, file, cb) {
+        const ext = path.extname(file.originalname);
+        cb(null, Date.now() + ext); // Имя файла будет уникальным, чтобы избежать конфликтов
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Маршрут для обработки POST-запросов на загрузку изображений
+app.post('/upload', upload.single('image'), (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: 'No file uploaded' });
+      }
+      // При успешной загрузке вернуть имя загруженного файла
+      res.json({ fileName: req.file.filename });
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
 
 // Middleware для проверки JWT токена и роли пользователя
 const authenticateToken = (req, res, next) => {
@@ -75,7 +104,7 @@ app.post('/api/register', async (req, res) => {
         // Генерация нового ID на основе последнего ID в списке пользователей
         const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
         const newUser = {
-            id: String(+lastUserId + 1), 
+            id: String(+lastUserId + 1),
             username,
             password: hashedPassword,
             role

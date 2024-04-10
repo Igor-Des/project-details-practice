@@ -72,7 +72,7 @@ function DetailPage() {
     return (
       <div className='detail-page__content'>
         <p className='detail-page__error-p'>Упс, что-то пошло не так.</p>
-        <img className='detail-page__error-img' src="./../images/sad-smile-png.png" alt="sad smile" />
+        <img className='detail-page__error-img' src="http://localhost:3001/images/sad-smile.png" alt="sad smile" />
         <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
         <div className='detail-page__error-view'>text for developer: {error}</div>
       </div>);
@@ -80,14 +80,14 @@ function DetailPage() {
 
   return (
     <div className='detail-page__content'>
-      <h2>Деталь(№{id}) в {isImageChanged ? "сборе" : "разборе"}</h2>
+      <h2>Деталь «{detail.name}»(№{id}) в {isImageChanged ? "сборе" : "разборе"}</h2>
       {detail && (
         <div className='detail-page'>
           <button className='detail-page__btn' onClick={handleClick}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>
           <div className='detail-page__image-click' onClick={handleClick}>
             <img
               className="detail-page__image"
-              src={isImageChanged ? './../images/' + detail.assemblyImg : './../images/' + detail.disassemblyImg}
+              src={isImageChanged ? 'http://localhost:3001/images/' + detail.assemblyImg : 'http://localhost:3001/images/' + detail.disassemblyImg}
               alt="loading image"
             />
           </div>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 
 import './../css/EditDetailPage.css';
 
@@ -16,6 +14,8 @@ function EditDetailPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [components, setComponents] = useState([]);
+  const [assemblyImgFile, setAssemblyImgFile] = useState(null);
+  const [disassemblyImgFile, setDisassemblyImgFile] = useState(null);
   const [assemblyImg, setAssemblyImg] = useState('');
   const [disassemblyImg, setDisassemblyImg] = useState('');
   const [isImageChanged, setIsImageChanged] = useState(true);
@@ -44,9 +44,17 @@ function EditDetailPage() {
 
   const handleSave = async () => {
     try {
-      // Получаем токен из localStorage
-      const token = localStorage.getItem("tokenAuthDetail")
-      console.log("token", token);
+      let assemblyImgFileName = assemblyImg;
+      let disassemblyImgFileName = disassemblyImg;
+
+      if (assemblyImgFile) {
+        assemblyImgFileName = await uploadImage(assemblyImgFile);
+      }
+      if (disassemblyImgFile) {
+        disassemblyImgFileName = await uploadImage(disassemblyImgFile);
+      }
+
+      const token = localStorage.getItem('tokenAuthDetail');
       await axios.put(
         `http://localhost:3001/details/${id}`,
         {
@@ -54,11 +62,11 @@ function EditDetailPage() {
           name,
           description,
           components,
-          assemblyImg,
-          disassemblyImg
+          assemblyImg: assemblyImgFileName,
+          disassemblyImg: disassemblyImgFileName,
         },
         {
-          headers: { Authorization: token }
+          headers: { Authorization: token },
         }
       );
       navigate(`/details/${id}`);
@@ -69,8 +77,25 @@ function EditDetailPage() {
     }
   };
 
-  const handleImageChange = () => {
-    setIsImageChanged(!isImageChanged);
+  const handleAssemblyImgChange = (event) => {
+    setAssemblyImgFile(event.target.files[0]);
+  };
+
+  const handleDisassemblyImgChange = (event) => {
+    setDisassemblyImgFile(event.target.files[0]);
+  };
+
+  const uploadImage = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const response = await axios.post('http://localhost:3001/upload', formData);
+      return response.data.fileName;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
   };
 
   const handleDeleteComponent = (index) => {
@@ -84,9 +109,7 @@ function EditDetailPage() {
   };
 
   if (loading) {
-    return (
-      <div className='detail-page__content'>Loading...</div>
-    );
+    return <div className='detail-page__content'>Loading...</div>;
   }
 
   if (error) {
@@ -96,16 +119,17 @@ function EditDetailPage() {
         <img className='detail-page__error-img' src="./../../images/sad-smile-png.png" alt="sad smile" />
         <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
         <div className='detail-page__error-view'>text for developer: {error}</div>
-      </div>);
+      </div>
+    );
   }
 
   return (
     <div className='detail-page__content'>
-      <h2>Редактирование детали (№{id})</h2>
+      <h2>Редактирование детали «{name}»(№{id})</h2>
       <div className='detail-page'>
-        <img 
+        <img
           className="detail-page__image"
-          src={isImageChanged ? `./../../images/${assemblyImg}` : `./../../images/${disassemblyImg}`}
+          src={isImageChanged ? `http://localhost:3001/images/${assemblyImg}` : `http://localhost:3001/images/${disassemblyImg}`}
           alt="loading image"
         />
         <div>
@@ -116,6 +140,13 @@ function EditDetailPage() {
           <label className='edit-title__name'>Описание:</label>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
+        
+        <div>
+          <p>Изображение в сборе:
+          <input type="file" onChange={handleAssemblyImgChange} /></p>
+          <p>Изображение в разборе: <input type="file" onChange={handleDisassemblyImgChange} /></p>
+        </div>
+
         <div>
           <label className='edit-title__name'>Компоненты:</label>
           <ul>
@@ -140,14 +171,15 @@ function EditDetailPage() {
         <div>
           <button className='edit-page__btn save' onClick={handleSave}>Сохранить изменения</button>
         </div>
-
         <hr />
         <div>
-          <button className='detail-page__btn' onClick={handleImageChange}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>
+          <button className='detail-page__btn' onClick={() => setIsImageChanged(!isImageChanged)}>
+            {isImageChanged ? "Разобрать деталь" : "Собрать деталь"}
+          </button>
         </div>
       </div>
       <div className='btn-home-container'>
-      <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
+        <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
       </div>
     </div>
   );

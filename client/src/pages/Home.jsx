@@ -82,7 +82,7 @@ function Home() {
     <div key={id} className="detail-item">
       <img
         className="detail-item__image"
-        src={'./images/' + assemblyImg}
+        src={'http://localhost:3001/images/' + assemblyImg}
         alt="loading image"
       />
       <div className="detail-info">
@@ -119,7 +119,7 @@ function Home() {
           <div className='detail-not-found'>
             <p>Деталей не найдено</p>
             <p>Попробуйте поискать что-то другое</p>
-            <img className='detail-page__error-img' src="./../../images/sad-smile-png.png" alt="sad smile" />
+            <img className='detail-page__error-img' src="http://localhost:3001/images/sad-smile.png" alt="sad smile" />
           </div>
         ) : (
           <>
@@ -131,7 +131,7 @@ function Home() {
           <p>Необходимо авторизоваться или зарегистрироваться</p>
           
           <div className='user-profile'>
-            <img className='user-auth__image' src="./images/people-login.png" alt="need login image" />
+            <img className='user-auth__image' src="http://localhost:3001/images/people-login.png" alt="need login image" />
             <Link to={`/register`} className='user-auth'>Регистрация</Link>
             <Link to={`/login`} className='user-auth'>Вход</Link>
           </div>

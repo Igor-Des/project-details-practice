@@ -9,7 +9,7 @@ const NotFound = () => {
       <h1>Страница не найдена</h1>
       <img
         className="not-found__image"
-        src={'./images/image-404.jpg'}
+        src={'http://localhost:3001/images/image-404.jpg'}
         alt="loading image"
       />
       <p>Извините, запрашиваемая страница не существует.</p>      

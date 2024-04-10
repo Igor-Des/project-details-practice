@@ -25,8 +25,8 @@
         "K15 56731"
       ]
     ],
-    "assemblyImg": "vint.png",
-    "disassemblyImg": "vint-razbor.png"
+    "assemblyImg": "1712792404949.png",
+    "disassemblyImg": "1712792404964.png"
   },
   {
     "id": "2",
@@ -46,16 +46,16 @@
         "M3 123764"
       ]
     ],
-    "assemblyImg": "bolt.png",
-    "disassemblyImg": "bolt-razbor.jpg"
+    "assemblyImg": "1712792508685.png",
+    "disassemblyImg": "1712792508696.jpg"
   },
   {
     "id": "3",
     "name": "Амортизатор масляный двухтрубный",
     "description": "гашение колебаний кузова автомобиля, внутри гидравлического элемента находится масло",
     "components": [],
-    "assemblyImg": "maslyaniy-amort.png",
-    "disassemblyImg": "maslyaniy-amort-razbor.png"
+    "assemblyImg": "1712792626179.png",
+    "disassemblyImg": "1712792626192.png"
   },
   {
     "id": "4",
@@ -71,8 +71,8 @@
         "1K6 86123"
       ]
     ],
-    "assemblyImg": "disk.jpg",
-    "disassemblyImg": "disk-razbor.png"
+    "assemblyImg": "1712792649429.jpg",
+    "disassemblyImg": "1712792649441.png"
   },
   {
     "id": "5",
@@ -88,7 +88,7 @@
         "P12 2346"
       ]
     ],
-    "assemblyImg": "amort-pered.png",
-    "disassemblyImg": "amort-pered-razbor.png"
+    "assemblyImg": "1712792665584.png",
+    "disassemblyImg": "1712792665597.png"
   }
 ]
