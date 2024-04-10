@@ -57,7 +57,7 @@ app.post('/api/register', async (req, res) => {
     const { username, password, role } = req.body;
 
     if (!username || !password || !role) {
-        return res.status(400).json({ message: 'Please provide username, password, and role' });
+        return res.status(401).json({ message: 'Заполните все данные корректно!' });
     }
 
     try {
@@ -69,13 +69,13 @@ app.post('/api/register', async (req, res) => {
         // Проверка на существование пользователя с таким же именем
         const existingUser = users.find(user => user.username === username);
         if (existingUser) {
-            return res.status(400).json({ message: 'User with this username already exists' });
+            return res.status(402).json({ message: 'Пользователь с таким логином уже существует!' });
         }
 
         // Генерация нового ID на основе последнего ID в списке пользователей
         const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
         const newUser = {
-            id: +lastUserId + 1, 
+            id: String(+lastUserId + 1), 
             username,
             password: hashedPassword,
             role
@@ -117,6 +117,68 @@ app.post('/api/login', async (req, res) => {
         }
     } catch (err) {
         res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+// Получение всех пользователей
+app.get('/api/users', authenticateToken, checkAdminRole, async (req, res) => {
+    try {
+        const data = await fs.readFile(usersFilePath, 'utf8');
+        res.json(JSON.parse(data));
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Получение пользователя по ID
+app.get('/api/users/:id', authenticateToken, checkAdminRole, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await fs.readFile(usersFilePath, 'utf8');
+        const users = JSON.parse(data);
+        const user = users.find(user => user.id === id);
+        if (!user) {
+            res.status(404).json({ message: 'Пользователь не найден' });
+        } else {
+            res.json(user);
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+// Изменение роли пользователя
+app.put('/api/users/:id', authenticateToken, checkAdminRole, async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { role } = req.body;
+        const data = await fs.readFile(usersFilePath, 'utf8');
+        let users = JSON.parse(data);
+        console.log(users);
+        const userIndex = users.findIndex(user => user.id === id);
+        if (userIndex === -1) {
+            res.status(404).json({ message: 'Пользователь не найден' });
+            return;
+        }
+        users[userIndex].role = role;
+        await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2));
+        res.json(users[userIndex]);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Удаление пользователя по ID
+app.delete('/api/users/:id', authenticateToken, checkAdminRole, async (req, res) => {
+    try {
+        console.log("delete app");
+        const id = req.params.id;
+        const data = await fs.readFile(usersFilePath, 'utf8');
+        let users = JSON.parse(data);
+        users = users.filter(user => user.id !== id);
+        await fs.writeFile(usersFilePath, JSON.stringify(users, null, 2));
+        res.json({ message: 'Пользователь успешно удален' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 

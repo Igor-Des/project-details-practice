@@ -47,6 +47,12 @@ function Header() {
         <Link to={`/`} className="btn-home-back catalog">Каталог деталей</Link>
         {user ? (
           <>
+          { user.role === "admin" ? (
+            <>
+          <Link to={`/users`} className="btn-home-back">Пользователи</Link>
+            </>
+          ) : (<> </>)
+          }          
             <div className='user-profile'>
               <span className='user-profile__name'>{user.username}</span>
               <span className='user-profile__role'> ({user.role})</span>

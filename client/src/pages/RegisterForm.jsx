@@ -6,6 +6,7 @@ import './../css/RegisterForm.css';
 const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [secondPassword, setSecondPassword] = useState('');
     const [error, setError] = useState('');
 
     let navigate = useNavigate();
@@ -13,14 +14,19 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (password !== secondPassword) {
+                setError('Пароли не совпадают');
+            }
+            else {
             const response = await axios.post('http://localhost:3001/api/register', { username, password, role });
             console.log('User registered successfully');
             setError('');
             navigate(`/login`);
             window.location.reload();
+            }
         } catch (error) {
-            console.error('Error registering user:', error);
-            setError('Регистрация не удалась. Заполните все поля корректно');
+            console.error('Error registering user:', error.response.data);
+            setError(`${error.response.data.message}`);
         }
     };
 
@@ -35,6 +41,10 @@ const RegisterForm = () => {
                 <div className="form-group">
                     <label htmlFor="password" className="form-label">Пароль:</label>
                     <input type="password" id="password" placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)} className="form-input" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="password" className="form-label">Повтор пароля:</label>
+                    <input type="password" id="password" placeholder="Введите пароль" value={secondPassword} onChange={(e) => setSecondPassword(e.target.value)} className="form-input" />
                 </div>
                 {error && <p className="error-message">{error}</p>}
                 <button type="submit" className="btn-register">Зарегистрироваться</button>

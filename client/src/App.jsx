@@ -7,6 +7,7 @@ import EditDetailPage from './pages/EditDetailPage';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
 import RegisterForm from './pages/RegisterForm';
+import UsersPage from './pages/UsersPage';
 import Footer from './components/Footer';
 
 import './css/App.css'
@@ -20,6 +21,7 @@ function App() {
         <Route path='/register' element={<RegisterForm />} />
         <Route path='/login' element={<LoginForm />} />
 
+        <Route path='/users' element={<UsersPage />} />
         <Route path='/' element={<Home />} />
         <Route path='/details/:id' element={<DetailPage />} />
         <Route path='/details/edit/:id' element={<EditDetailPage />} />
