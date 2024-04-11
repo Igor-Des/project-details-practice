@@ -95,7 +95,7 @@ function Home() {
           {user.role === 'admin' && (
             <>
               <Link to={`/details/edit/${id}`} className="detail-action__edit">Изменить</Link>
-              <a href="#" className="detail-action__delete" onClick={() => handleConfirmDelete(id, name, description)}>Удалить</a>
+              <a className="detail-action__delete" onClick={() => handleConfirmDelete(id, name, description)}>Удалить</a>
             </>
           )}
         </div>
@@ -105,15 +105,14 @@ function Home() {
 
   return (
     <div>
-      <div className="detail-search">
-        <input
-          className='detail-search__input'
-          type="text"
-          placeholder="Поиск по названию детали"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      {user.role !== null ? (
+        user.role === "admin" ? (
+          <Link to={`/details/create`} className="detail-link_create">Добавить новую деталь</Link>          
+        ) : ( <> </>)
+      ) : (
+        <> </>
+      )
+      }
       {user.role !== null ? (
         renderDetails.length === 0 ? (
           <div className='detail-not-found'>
@@ -123,6 +122,16 @@ function Home() {
           </div>
         ) : (
           <>
+          <div className="detail-search">
+        <input
+          className='detail-search__input'
+          type="text"
+          placeholder="Поиск по названию детали"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      
             {renderDetails}
           </>
         )

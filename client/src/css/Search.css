@@ -9,3 +9,24 @@
     height: 30px;
     width: 300px;
 }
+
+.detail-link_create {
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ebebeb;
+    border: 1px solid #333;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s ease-in;
+  }
+  
+  .detail-link_create:hover {
+    border: 1px solid #000; 
+    background-color: #adadad;
+    color: #fff;
+  }
+  

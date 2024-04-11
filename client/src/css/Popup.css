@@ -54,3 +54,6 @@
     font-weight: 600;
   }
   
+  .detail-action__delete {
+    cursor: pointer;
+  }

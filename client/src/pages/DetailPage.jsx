@@ -80,7 +80,7 @@ function DetailPage() {
 
   return (
     <div className='detail-page__content'>
-      <h2>Деталь «{detail.name}»(№{id}) в {isImageChanged ? "сборе" : "разборе"}</h2>
+      <h2>Деталь «{detail.name}» в {isImageChanged ? "сборе" : "разборе"}</h2>
       {detail && (
         <div className='detail-page'>
           <button className='detail-page__btn' onClick={handleClick}>{isImageChanged ? "Разобрать деталь" : "Собрать деталь"}</button>

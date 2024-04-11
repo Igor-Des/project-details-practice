@@ -1,1 +1,26 @@
-[{"id":"1","username":"admin","password":"$2b$10$PG7J6egyMyZQJqfJgZmrUeP7L2Z4All57OaJRCGxJEZJb8zEm2WKy","role":"admin"},{"id":"3","username":"qwerty","password":"$2b$10$sGTy7sumaWuO1KOov3ucJeYIoMrUfy7G0mU7mCy3LqAtshm6mPC1m","role":"user"},{"id":"4","username":"igor","password":"$2b$10$ZTtFkYK7vUrru4NQhDi/SOsY2UDl5F8VFAr37ZqBgkalPeigr9X3y","role":"user"}]
+[
+  {
+    "id": "1",
+    "username": "admin",
+    "password": "$2b$10$PG7J6egyMyZQJqfJgZmrUeP7L2Z4All57OaJRCGxJEZJb8zEm2WKy",
+    "role": "admin"
+  },
+  {
+    "id": "3",
+    "username": "qwerty",
+    "password": "$2b$10$sGTy7sumaWuO1KOov3ucJeYIoMrUfy7G0mU7mCy3LqAtshm6mPC1m",
+    "role": "user"
+  },
+  {
+    "id": "4",
+    "username": "igor",
+    "password": "$2b$10$ZTtFkYK7vUrru4NQhDi/SOsY2UDl5F8VFAr37ZqBgkalPeigr9X3y",
+    "role": "user"
+  },
+  {
+    "id": "5",
+    "username": "qwe",
+    "password": "$2b$10$dsrn1SQrnEoR4h2TAHrvPO/zfrJcQcRrQ0ye0fYiuMxJvkehjQVK6",
+    "role": "admin"
+  }
+]

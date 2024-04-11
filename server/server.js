@@ -238,17 +238,37 @@ app.get('/details/:id', async (req, res) => {
 });
 // Создание новой детали
 app.post('/details', authenticateToken, checkAdminRole, async (req, res) => {
-    try {
-        const data = await fs.readFile(JSON_FILE, 'utf8');
-        const details = JSON.parse(data);
-        const newDetail = req.body;
-        details.push(newDetail);
-        await fs.writeFile(JSON_FILE, JSON.stringify(details, null, 2));
-        res.status(201).json({ message: 'Detail created successfully' });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    const { name, description, components, assemblyImg, disassemblyImg } = req.body;
+  
+    if (!name || !description || !components || !assemblyImg || !disassemblyImg) {
+      return res.status(400).json({ message: 'Please provide all details' });
     }
-});
+  
+    try {
+      const data = await fs.readFile(JSON_FILE, 'utf8');
+      const details = JSON.parse(data);
+  
+      // Генерация нового ID на основе последнего ID в списке деталей
+      const lastDetailId = details.length > 0 ? details[details.length - 1].id : 0;
+      const newDetail = {
+        id: String(+lastDetailId + 1),
+        name,
+        description,
+        components,
+        assemblyImg,
+        disassemblyImg
+      };
+  
+      details.push(newDetail);
+  
+      await fs.writeFile(JSON_FILE, JSON.stringify(details, null, 2));
+  
+      res.status(201).json({ message: 'Detail created successfully', detail: newDetail });
+    } catch (error) {
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+
 // Обновление существующей детали
 app.put('/details/:id', authenticateToken, checkAdminRole, async (req, res) => {
     try {

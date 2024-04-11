@@ -7,6 +7,7 @@ import EditDetailPage from './pages/EditDetailPage';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
 import RegisterForm from './pages/RegisterForm';
+import CreatePage from './pages/CreateDetailPage';
 import UsersPage from './pages/UsersPage';
 import Footer from './components/Footer';
 
@@ -23,6 +24,7 @@ function App() {
 
         <Route path='/users' element={<UsersPage />} />
         <Route path='/' element={<Home />} />
+        <Route path='/details/create' element={<CreatePage />} />
         <Route path='/details/:id' element={<DetailPage />} />
         <Route path='/details/edit/:id' element={<EditDetailPage />} />
         <Route path='*' element={<NotFound />} />

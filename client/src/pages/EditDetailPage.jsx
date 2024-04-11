@@ -116,7 +116,7 @@ function EditDetailPage() {
     return (
       <div className='detail-page__content'>
         <p className='detail-page__error-p'>Упс, что-то пошло не так.</p>
-        <img className='detail-page__error-img' src="./../../images/sad-smile-png.png" alt="sad smile" />
+        <img className='detail-page__error-img' src="http://localhost:3001/images/sad-smile.png" alt="sad smile" />
         <Link to={`/`} className="btn-home">Вернуться в каталог товаров</Link>
         <div className='detail-page__error-view'>text for developer: {error}</div>
       </div>
@@ -125,7 +125,7 @@ function EditDetailPage() {
 
   return (
     <div className='detail-page__content'>
-      <h2>Редактирование детали «{name}»(№{id})</h2>
+      <h2>Редактирование детали «{name}»</h2>
       <div className='detail-page'>
         <img
           className="detail-page__image"
