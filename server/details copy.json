@@ -90,26 +90,5 @@
     ],
     "assemblyImg": "1712792665584.png",
     "disassemblyImg": "1712792665597.png"
-  },
-  {
-    "id": "6",
-    "name": "test",
-    "description": "descr text",
-    "components": [
-      [
-        "comp1",
-        "M2G 564G"
-      ],
-      [
-        "comp2",
-        "M1J 456G"
-      ],
-      [
-        "34yg34",
-        "asd"
-      ]
-    ],
-    "assemblyImg": "1712860275731.jpg",
-    "disassemblyImg": "1712860275745.jpg"
   }
 ]

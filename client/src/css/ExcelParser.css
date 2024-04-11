@@ -1,0 +1,68 @@
+.parse-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .input-for-excel-file {
+    margin-bottom: 20px;
+  }
+  
+  .detail-parse-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .parse-name,
+  .parse-desc,
+  .parse-comp,
+  .parse-images {
+    margin-bottom: 10px;
+  }
+  
+  .parse-title__name,
+  .parse-title__description,
+  .parse-title__comp {
+    font-weight: bold;
+  }
+  
+  .ul-comp {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .li-comp {
+    font-size: 14px;
+    padding: 0px;
+    margin: 10px;
+  }
+  
+  .btn-for-save-detail-parse {
+    background-color: rgb(46, 161, 127);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+    transition: .2s ease-in; 
+  }
+  
+  .btn-for-save-detail-parse:hover {
+    background-color: rgb(37, 211, 159);
+  }
+  
+  .btn-for-del-detail-parse {
+    background-color: rgb(187, 187, 187);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    
+    transition: .2s ease-in; 
+  }
+
+  .btn-for-del-detail-parse:hover {
+    background-color: rgb(128, 128, 128);
+  }

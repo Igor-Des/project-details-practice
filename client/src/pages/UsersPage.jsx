@@ -90,7 +90,6 @@ function UsersPage() {
       headers: { Authorization: token },
     })
       .then(response => {
-        console.log(response);
         setUsers(users.filter(user => user.id !== id));
         setDeleteUserId(null);
       })
@@ -108,7 +107,6 @@ function UsersPage() {
         headers: { Authorization: token },
       })
       .then(response => {
-        console.log(response);
         const updatedUsers = users.map(user => {
           if (user.id === userId) {
             return { ...user, role: newRole };

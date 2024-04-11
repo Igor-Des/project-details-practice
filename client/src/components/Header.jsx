@@ -44,28 +44,33 @@ function Header() {
   return (
     <header>
       <div className='header-nav'>
-        <Link to={`/`} className="btn-home-back catalog">Каталог деталей</Link>
         {user ? (
           <>
-          { user.role === "admin" ? (
-            <>
-          <Link to={`/users`} className="btn-home-back">Пользователи</Link>
-            </>
-          ) : (<> </>)
-          }          
+            {user.role === "admin" ? (
+              <>
+
+                <Link to={`/`} className="btn-home-back">Каталог деталей</Link>
+                <Link to={`/users`} className="btn-home-back">Пользователи</Link>
+                <Link to={`/details/parse`} className="btn-home-back">Экспорт деталей</Link>
+              </>
+            ) : (<>
+              <Link to={`/`} className="btn-home-back catalog">Каталог деталей</Link> </>)
+            }
             <div className='user-profile'>
               <span className='user-profile__name'>{user.username}</span>
               <span className='user-profile__role'> ({user.role})</span>
-            <button onClick={handleLogout} className="btn-exit">Выход</button>
+              <button onClick={handleLogout} className="btn-exit">Выход</button>
             </div>
-            
+
           </>
         ) : (
           <>
-          <div className='user-profile'>
-            <Link to={`/register`} className="btn-auth">Регистрация</Link>
-            <Link to={`/login`} className="btn-auth">Вход</Link>
-          </div>
+
+            <Link to={`/`} className="btn-home-back catalog">Каталог деталей</Link>
+            <div className='user-profile'>
+              <Link to={`/register`} className="btn-auth">Регистрация</Link>
+              <Link to={`/login`} className="btn-auth">Вход</Link>
+            </div>
           </>
         )}
       </div>

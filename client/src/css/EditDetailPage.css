@@ -24,13 +24,11 @@ button {
     font-weight: bold;
     text-decoration: none;
     color: #fff;
-    background-color: rgb(46, 138, 161);
     transition: .2s ease-in; 
   }
 
   .btn-back-detail {
     color: rgb(255, 255, 255);
-    background-color: rgb(37, 170, 211);
   
 }
 

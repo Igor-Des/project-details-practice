@@ -22,23 +22,23 @@ app.use(cors());
 // Настройка хранения загруженных файлов
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/images'); // Путь к папке, где будут сохраняться изображения
+        cb(null, 'public/images'); // путь, где будут сохраняться изображения
     },
     filename: function (req, file, cb) {
         const ext = path.extname(file.originalname);
-        cb(null, Date.now() + ext); // Имя файла будет уникальным, чтобы избежать конфликтов
+        cb(null, Date.now() + ext); // генерация уникального имени файла
     }
 });
 
 const upload = multer({ storage: storage });
 
-// Маршрут для обработки POST-запросов на загрузку изображений
+// Загрузка картинок на серве
 app.post('/upload', upload.single('image'), (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
       }
-      // При успешной загрузке вернуть имя загруженного файла
+      // При успешной загрузке вернуть имя файла
       res.json({ fileName: req.file.filename });
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -139,7 +139,7 @@ app.post('/api/login', async (req, res) => {
         const result = await bcrypt.compare(password, user.password);
         if (result) {
             // Генерация JWT токена
-            const token = jwt.sign({ username, role: user.role }, tokenKey, { expiresIn: '60m' });
+            const token = jwt.sign({ username, role: user.role }, tokenKey, { expiresIn: '1440m' });
             return res.status(200).json({ message: 'Login successful', token });
         } else {
             return res.status(401).json({ message: 'Invalid username or password' });
